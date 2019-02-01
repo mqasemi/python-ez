@@ -1,5 +1,6 @@
 from CountType import CountType
 
+
 class Category:
     
     def __init__(self,name,parent,id,type):
@@ -58,5 +59,6 @@ class Category:
             str=str+" in zirmajmoe {}".format(self.parent.name)
         str=str+" type is {}".format(self.type)
         return str
+   
     
     

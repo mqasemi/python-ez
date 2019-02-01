@@ -5,24 +5,35 @@ from ContinusItem import ContinusItem
 from DiscritItem import DiscritItem
 from Categorey import Category
 from CountType import CountType
+from Categorys import Categorys
+
 
 
 
 if __name__ == "__main__":
+
+    cats=Categorys()
+    
+"""
     db={}
+    c=CountType(1)
     categoris=[]
     behdashti=Category("behdashti",None,1,CountType.NONE)
     ater=Category("ater",behdashti,2,CountType.DESCRIT)
 
     khoraki=Category("khoraki",None,3,CountType.NONE)
     gosht=Category("gosht",khoraki,4,CountType.CONTINUS)
-    
+   
+    cats.add(behdashti)
+    cats.add(ater)
+    cats.add(khoraki)
+    cats.add(gosht)
 
-    categoris.append(ater)
-    categoris.append(behdashti)
-    categoris.append(khoraki)
-    categoris.append(gosht)
-    db["cat"]=categoris
+    cats.save()
+"""
+
+
+   
     
 
 
