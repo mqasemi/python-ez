@@ -1,34 +1,26 @@
 from Categorey import Category
 from CountType import CountType
+import jsonpickle as jsonp
 class Categorys:
 
 
     def get_category(self,id):
-        with open('categorys.csv',"r") as db:
-            records=db.readlines()
-            for record in records :
-                if (record.split(','))[2]==id:
-                    return record.split(',')
+        categorys=self.list_categorys()
+        for cat in categorys:
+            if cat.id==id:
+                return cat
+        return None
+
+    def list_categorys(self):
+        with open('db/categorys.json',"r") as db:
+            records=db.read()
+            if(records!=None and len(records)>0):
+                return(jsonp.decode(records))
         return []
 
     def __init__(self):
-        self.__categorys=[]
-        with open('categorys.csv',"r") as db:
-                records=db.readlines()
-                for record in records :
-                    
-                   # parent=Category()
-                    record_property=record.split(',')
-                    if record_property[1]!="-1":
-                        parent_property=self.get_category(record.split(',')[1])
-                        parent=Category(parent_property[0],None,parent_property[2],CountType(int(record_property[3])))
-                    else:
-                        parent=None
-
-                    category=Category(record_property[0],parent,record_property[2],CountType(int(record_property[3])))
-                    self.__categorys.append(category)
-
-
+        self.__categorys=self.list_categorys()
+        
                 
         
 
@@ -65,7 +57,5 @@ class Categorys:
               
     
     def save(self):
-        with open('categorys.csv',"w") as db:
-            for i in self:
-                record="{},{},{},{},{}".format(i.name,i.parent.id,i.id,i.type.value,"\n")
-                db.write(record)
+        with open('db/categorys.json',"w") as db:
+            db.write(jsonp.encode(self.__categorys))
